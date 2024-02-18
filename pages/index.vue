@@ -2,30 +2,40 @@
     <div class="main-box">
         {{ xValue }} - {{ yValue }}
         <div class="main">
-            <img src="/img/background.png" data-speedx="0.3" class="parallax bg-img" :style="computedStyle" />
-            <img src="/img/fog_7.png" data-speedx="0.3" class="parallax fog-7" :style="computedStyle" />
-            <img src="/img/mountain_10.png" class="parallax mountain-10" :style="computedStyle" />
-            <img src="/img/fog_6.png" class="parallax fog-6" :style="computedStyle" />
-            <img src="/img/mountain_9.png" class="parallax mountain-9" :style="computedStyle" />
-            <img src="/img/mountain_8.png" class="parallax mountain-8" :style="computedStyle" />
-            <img src="/img/fog_5.png" class="parallax fog-5" :style="computedStyle"  />
-            <img src="/img/mountain_7.png" class="parallax mountain-7" :style="computedStyle" />
-            <div class="text parallax">
+            <img 
+                src="/img/background.png" 
+                data-speedx="0.3" 
+                class="parallax bg-img" 
+                 
+            />
+            <img 
+                src="/img/fog_7.png" 
+                data-speedx="0.27" 
+                class="parallax fog-7" 
+                
+            />
+            <img src="/img/mountain_10.png" data-speedx="0.195" class="parallax mountain-10"  />
+            <img src="/img/fog_6.png" data-speedx="0.25" class="parallax fog-6"  />
+            <img src="/img/mountain_9.png" data-speedx="0.125" class="parallax mountain-9"  />
+            <img src="/img/mountain_8.png" data-speedx="0.1" class="parallax mountain-8"  />
+            <img src="/img/fog_5.png" data-speedx="0.16" class="parallax fog-5"   />
+            <img src="/img/mountain_7.png" data-speedx="0.1" class="parallax mountain-7"  />
+            <div class="text parallax" data-speedx="0.07">
                 <h2>China</h2>
                 <h1>Zhangjiajie</h1>
             </div>
-            <img src="/img/mountain_6.png" class="parallax mountain-6" :style="computedStyle" />
-            <img src="/img/fog_4.png" class="parallax fog-4" />
-            <img src="/img/mountain_5.png" class="parallax mountain-5" :style="computedStyle" />
-            <img src="/img/fog_3.png" class="parallax fog-3" />
-            <img src="/img/mountain_4.png" class="parallax mountain-4" :style="computedStyle" />
-            <img src="/img/mountain_3.png" class="parallax mountain-3" :style="computedStyle" />
-            <img src="/img/fog_2.png" class="parallax fog-2" />
-            <img src="/img/mountain_2.png" class="parallax mountain-2" :style="computedStyle" />
-            <img src="/img/mountain_1.png" class="parallax mountain-1" :style="computedStyle" />
+            <img src="/img/mountain_6.png" data-speedx="0.065" class="parallax mountain-6"  />
+            <img src="/img/fog_4.png" data-speedx="0.135" class="parallax fog-4" />
+            <img src="/img/mountain_5.png" data-speedx="0.08" class="parallax mountain-5"  />
+            <img src="/img/fog_3.png" data-speedx="0.11" class="parallax fog-3" />
+            <img src="/img/mountain_4.png" data-speedx="0.059" class="parallax mountain-4"  />
+            <img src="/img/mountain_3.png" data-speedx="0.04" class="parallax mountain-3"  />
+            <img src="/img/fog_2.png" data-speedx="0.15" class="parallax fog-2" />
+            <img src="/img/mountain_2.png" data-speedx="0.0235" class="parallax mountain-2"  />
+            <img src="/img/mountain_1.png" data-speedx="0.027" class="parallax mountain-1"  />
             <img src="/img/sun_rays.png" class="sun-rays" />
             <!-- <img src="/img/black_shadow.png" class="black-shadow" />
-            <img src="/img/fog_1.png" class="parallax fog-1" /> -->
+            <img src="/img/fog_1.png" data-speedx="0.12" class="parallax fog-1" /> -->
 
         
     </div>
@@ -41,7 +51,11 @@ const xValue = ref(null)
 const yValue = ref(null)
 
 const selectedElements = ref([])
-
+const computedStyle = computed(() => {
+    return {
+        transform: `translateX(calc(-50% - ${xValue.value}px)) translateY(calc(-50% - ${yValue.value}px))`
+    }
+}) 
     
 onMounted(() => {
     selectedElements.value = document.querySelectorAll('.parallax'); 
@@ -55,14 +69,11 @@ watch(() => [x.value, y.value] ,([newX, newY])=> {
     yValue.value = y.value - (height.value / 2)
     selectedElements.value.forEach(element => {
         console.log(element.dataset.speedx);
+        element.style.transform = `translateX(calc(-50% - ${xValue.value}px)) translateY(calc(-50% - ${yValue.value}px))`
     })
 })
 
-const computedStyle = computed(() => {
-    return {
-        transform: `translateX(calc(-50% - ${xValue.value}px)) translateY(calc(-50% - ${yValue.value}px))`
-    }
-}) 
+
 </script>
 
 <style lang="sass" scoped>
