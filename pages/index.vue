@@ -46,8 +46,9 @@
     
 </template>
 <script setup>
-import {ref, onMounted, reactive} from 'vue'
-import { useMouse, useWindowSize } from '@vueuse/core'
+import { ref, onMounted } from 'vue'
+import gsap from 'gsap'
+import { useMouse, useWindowSize, useElementSize } from '@vueuse/core'
 const { width, height } = useWindowSize()
 const { x, y } = useMouse()
 const xValue = ref(null)
@@ -66,13 +67,31 @@ const selectedElements = ref([])
 //             console.log('newValue', newValue)
 //         }  
 //     }) 
+init()
+onMounted(async() => {
+    await nextTick()
     
-onMounted(() => {
     selectedElements.value = document.querySelectorAll('.parallax')
+    const timeline = gsap.timeline()
+    // selectedElements.value.forEach(element => {
+    //     timeline.from(element, {
+    //         top: `${ useElementSize(element).height.value / 2 - 200 }px`, 
+    //         duration: 1
+    //     }, "1")
+    //     timeline.to(element, {
+    //         top: `${ useElementSize(element).height.value / 2 + 200 }px`, 
+    //         duration: 1
+    //     }, "1")
+    // })
+
+    init()
 })
 
 watch(() => [x.value, y.value] ,([newX, newY])=> {
-   
+   init()    
+})
+
+function init() {
     rotateDegree.value = (xValue.value / (width.value / 2)) * 20
     selectedElements.value.forEach(element => {
         let isInLeft = parseFloat(getComputedStyle(element).left) < width.value / 2 ? 1 : -1
@@ -84,9 +103,9 @@ watch(() => [x.value, y.value] ,([newX, newY])=> {
         let speedx = element.dataset.speedx
         let speedy = element.dataset.speedy
         let speedz = element.dataset.speedz
-console.log(rotateDegree.value);
+        let rotationSpeed = element.dataset.rotation
         element.style.transform = `translateX(calc(-50% - ${xValue.value * speedx}px)) 
-        rotateY(${ rotateDegree.value }deg)
+        rotateY(${ rotateDegree.value * rotationSpeed }deg)
         translateY(calc(-50% - ${yValue.value * speedy}px)) 
         perspective(2300px) translateZ( ${zValue.value * speedz}px) `
     })
@@ -100,7 +119,7 @@ console.log(rotateDegree.value);
     //         transform: newValue
     //     }  
     // }) 
-})
+}
 
 
 </script>
