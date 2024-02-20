@@ -4,6 +4,9 @@ export default defineNuxtConfig({
   css: [
     '@/assets/css/main.sass',
   ],
+  dir: {
+    pages: 'customPages/tmart'
+  }
   // postcss: {
   //   plugins: {
   //     tailwindcss: {},
