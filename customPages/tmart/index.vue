@@ -1,5 +1,7 @@
 <template>
   <div class="main-box">
+    <!-- <h1>{{ $sayHello('Saman') }}</h1> -->
+    <IconsBell />
     <div class="main">
       <img
         src="/img/background.png"
@@ -158,8 +160,18 @@
 </template>
 <script setup>
 import { ref, onMounted } from 'vue'
+console.log('useNuxtApp', useNuxtApp());
+const { $sayHello } = useNuxtApp()
+$sayHello('Sahraei')
 // import gsap from 'gsap'
+// import { useUtils } from '../../composebles/useUtils'
 import { useMouse, useWindowSize } from '@vueuse/core'
+ const { saySomething } = useUtils()
+ saySomething()
+definePageMeta({
+  layout: 'customLayout'
+})
+
 const { width, height } = useWindowSize()
 const { x, y } = useMouse()
 const xValue = ref(null)
