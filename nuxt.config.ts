@@ -5,12 +5,12 @@ export default defineNuxtConfig({
     '@/assets/css/main.sass',
   ],
   dir: {
-    pages: 'customPages/tmart'
-  }
-  // postcss: {
-  //   plugins: {
-  //     tailwindcss: {},
-  //     autoprefixer: {},
-  //   },
-  // },
+    pages: 'pages/astro'
+  },
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
 })
