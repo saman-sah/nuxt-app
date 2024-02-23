@@ -7,6 +7,10 @@ export default defineNuxtConfig({
   dir: {
     pages: 'pages/astro'
   },
+  modules: [
+    '@nuxt/content',
+    '@nuxt/pinia'
+  ],
   postcss: {
     plugins: {
       tailwindcss: {},
