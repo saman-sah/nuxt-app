@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <ContentDoc />
         <hr>
         {{ counter }}
@@ -10,6 +11,8 @@
 
 </template>
 <script setup>
+const response=await $fetch('/api/hello')
+console.log('response',response);
 const counter = useCounter();
 console.log('counter',counter.value);
 

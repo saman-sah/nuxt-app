@@ -1,5 +1,5 @@
 export default defineEventHandler((event) => {
   return {
-    api: "works"
+    api: "api folder"
   }
 })
